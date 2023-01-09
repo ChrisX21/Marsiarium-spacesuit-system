@@ -23,11 +23,8 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly
- 
-  //delay(12000);
   
   rechargeOxygen();
-
 }
 
 void usingOxygen() {
@@ -63,7 +60,9 @@ void usingOxygen() {
 
   delay(5000);
   lcd.clear();
-  lcd.print("No oxygen left");
+  lcd.print("No oxygen left!");
+  lcd.setCursor(0, 1);
+  lcd.println("Get inside!      ");
   delay(3000);
   oxygen_volume = 0;
   isEmpty = true;
@@ -94,6 +93,7 @@ void rechargeOxygen() {
   Serial.println();
   Serial.print("Message : ");
   content.toUpperCase();
+ 
   if (content.substring(1) == "93 4A 97 15" || content.substring(1) == "F3 3E C7 16") 
   {
     if(isEmpty == true){
@@ -141,6 +141,7 @@ void rechargeOxygen() {
   }
  
  else   {
+  lcd.clear();
     lcd.print("Not recognised!");
     delay(3000);
   }
