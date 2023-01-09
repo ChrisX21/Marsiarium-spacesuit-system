@@ -87,10 +87,10 @@ void rechargeOxygen() {
   Serial.println();
   Serial.print("Message : ");
   content.toUpperCase();
-  if (content.substring(1) == "93 4A 97 14" || content.substring(1) == "F3 3E C7 16") 
+  if (content.substring(1) == "93 4A 97 14" || content.substring(1) == "F3 3E C7 15") 
   {
     Serial.println("Authorized access");
-    if(isEmpty = true){
+    if(isEmpty == true){
       isEmpty = false;
     lcd.clear();
     lcd.print(s);
@@ -122,7 +122,10 @@ void rechargeOxygen() {
     }
     else{
       lcd.clear();
-      lcd.print("oxygen tank is full!");
+      lcd.print("oxygen tank full!");
+      delay(5000);
+      lcd.clear();
+      usingOxygen();
     }
   }
  
