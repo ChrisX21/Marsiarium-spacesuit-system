@@ -5,7 +5,7 @@ MFRC522 mfrc522(10, 9);
 LiquidCrystal_I2C lcd(0x27, 16, 2);
 char s = 219;
 bool isEmpty = false;
-
+int oxygen_volume;
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
@@ -31,6 +31,7 @@ void loop() {
 }
 
 void usingOxygen() {
+  oxygen_volume = 100;
   lcd.print(s);
   lcd.print(" ");
   lcd.print(s);
@@ -41,6 +42,7 @@ void usingOxygen() {
 
   delay(2000);
   lcd.clear();
+  oxygen_volume = 75;
   lcd.print(s);
   lcd.print(" ");
   lcd.print(s);
@@ -49,16 +51,21 @@ void usingOxygen() {
 
   delay(2000);
   lcd.clear();
+  oxygen_volume = 50;
   lcd.print(s);
   lcd.print(" ");
   lcd.print(s);
 
   delay(2000);
+  oxygen_volume = 25;
   lcd.clear();
   lcd.print(s);
 
   delay(5000);
   lcd.clear();
+  lcd.print("No oxygen left");
+  delay(3000);
+  oxygen_volume = 0;
   isEmpty = true;
 }
 
@@ -89,20 +96,23 @@ void rechargeOxygen() {
   content.toUpperCase();
   if (content.substring(1) == "93 4A 97 15" || content.substring(1) == "F3 3E C7 16") 
   {
-    Serial.println("Authorized access");
     if(isEmpty == true){
-      isEmpty = false;
+    isEmpty = false;
+    delay(1000);
     lcd.clear();
+    oxygen_volume = 25;
     lcd.print(s);
     delay(2000);
 
     lcd.clear();
+    oxygen_volume = 50;
     lcd.print(s);
     lcd.print(" ");
     lcd.print(s);
     delay(2000);
 
     lcd.clear();
+    oxygen_volume = 75;
     lcd.print(s);
     lcd.print(" ");
     lcd.print(s);
@@ -111,6 +121,7 @@ void rechargeOxygen() {
     delay(2000);
 
     lcd.clear();
+    oxygen_volume = 100;
     lcd.print(s);
     lcd.print(" ");
     lcd.print(s);
@@ -122,15 +133,15 @@ void rechargeOxygen() {
     }
     else{
       lcd.clear();
-      lcd.print("oxygen tank full!");
-      delay(5000);
+      lcd.print("Oxygen tank full!");
+      delay(6000);
       lcd.clear();
       usingOxygen();
     }
   }
  
  else   {
-    lcd.print("Access denied");
+    lcd.print("Not recognised!");
     delay(3000);
   }
 } 
