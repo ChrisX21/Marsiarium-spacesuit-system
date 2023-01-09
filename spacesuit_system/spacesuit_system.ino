@@ -87,7 +87,7 @@ void rechargeOxygen() {
   Serial.println();
   Serial.print("Message : ");
   content.toUpperCase();
-  if (content.substring(1) == "93 4A 97 14" || content.substring(1) == "F3 3E C7 15") 
+  if (content.substring(1) == "93 4A 97 15" || content.substring(1) == "F3 3E C7 16") 
   {
     Serial.println("Authorized access");
     if(isEmpty == true){
